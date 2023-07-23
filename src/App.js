@@ -3,9 +3,12 @@ import CartContainer from "./components/CartContainer";
 import NavBar from "./components/NavBar";
 import { useEffect } from "react";
 import { calculateTotals } from "./features/cart/cartSlice";
+import Modal from "./components/Modal";
+import { store } from "./store";
 
 function App() {
   const cartItems = useSelector((state) => state.cart);
+  const { isOpen } = useSelector((store) => store.modal);
   const disptach = useDispatch();
 
   useEffect(() => {
@@ -13,6 +16,7 @@ function App() {
   }, [cartItems]);
   return (
     <main>
+      {isOpen && <Modal />}
       <NavBar />
       <CartContainer />
     </main>
